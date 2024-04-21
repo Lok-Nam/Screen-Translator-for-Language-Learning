@@ -160,3 +160,9 @@ cython_debug/
 #.idea/
 
 cropped_image.png
+.env
+JMdict_e.xml
+test1.py
+tasks.txt
+dbtest.py
+cropped_image.png

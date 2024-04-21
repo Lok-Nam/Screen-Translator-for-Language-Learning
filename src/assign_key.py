@@ -17,23 +17,23 @@ class KeyCaptureDialog(QDialog):
         self.keylist = []
     
     def keyPressEvent(self, event):
-        if event.key() == Qt.Key_Escape:  # If ESC is pressed, close the dialog without saving a key
+        if event.key() == Qt.Key_Escape:  # if ESC is pressed, close the dialog without saving a key
             self.close()
             return
 
-        # Use the modified keyevent_to_string to handle the conversion.
+        # use the modified keyevent_to_string to handle the conversion
         key_str = keyevent_to_string(event)
 
-        # Check if the event is a combination (contains a modifier and another key).
+        # check if the event is a combination (contains a modifier and another key)
         if '+' in key_str:
-            # This is a combination; check if the last entry in keylist is part of this combination.
+            # check if the last entry in keylist is part of this combination
             if self.keylist and any(modifier in key_str for modifier in modmap.values()):
-                # If the last key in keylist is a modifier of the current combination, remove it.
+                # if the last key in keylist is a modifier of the current combination, remove it
                 last_key = self.keylist[-1]
                 if any(modifier == last_key for modifier in modmap.values()):
                    self.keylist.pop()
 
-        # Append the current key or combination to keylist if not already included.
+        # append the current key or combination to keylist if not already included
         if not key_str in self.keylist:
             self.keylist.append(key_str)
             print("appended ", key_str)
@@ -88,8 +88,8 @@ def assign_key(callback=None):
     dialog = KeyCaptureDialog()
     if dialog.exec_() == QDialog.Accepted and dialog.key:
         print("saved", dialog.key)
-        saveKey(dialog.key)  # Save the captured key
-        Config.write(open("src\config.ini", "w"))  # Save changes to config file
+        saveKey(dialog.key)  # save the captured key
+        Config.write(open("src\config.ini", "w"))  # save changes to config file
     if callback:
         callback()
 
@@ -98,7 +98,7 @@ def saveKey(key):
     Config.set('CaptureKey', 'Key', key)
 
 def convert_to_qkeysequence_format(key_sequence):
-    # Mapping from the saved format to QKeySequence format
+    # mapping key format
     replacements = {
         'Control': 'Ctrl',
         'Alt': 'Alt',

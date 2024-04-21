@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QApplication, QDialog
-from PyQt5.QtGui import QPixmap, QPainter, QPen, QGuiApplication
+from PyQt5.QtGui import QPainter, QPen, QGuiApplication
 from PyQt5.QtCore import Qt, QRect
 
 class CropTool(QDialog):
@@ -12,9 +12,11 @@ class CropTool(QDialog):
         self.initUI()
 
     def initUI(self):
-        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint)
         self.setGeometry(self.original_pixmap.rect())
         self.show()
+        self.raise_()
+        self.activateWindow()
 
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -39,8 +41,8 @@ class CropTool(QDialog):
         self.cropped_pixmap.save('cropped_image.png')
 
 def capture_screen():
-    app = QApplication.instance()  # Checks if QApplication already exists
-    if not app:  # Create a new instance if it does not exist
+    app = QApplication.instance()  # checks if QApplication already exists
+    if not app:  # create a new instance if it does not exist
         app = QApplication([])
     screen = QGuiApplication.primaryScreen()
     screenshot = screen.grabWindow(0)
