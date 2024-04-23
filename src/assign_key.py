@@ -36,7 +36,6 @@ class KeyCaptureDialog(QDialog):
         # append the current key or combination to keylist if not already included
         if not key_str in self.keylist:
             self.keylist.append(key_str)
-            print("appended ", key_str)
 
         self.firstrelease = True
 
@@ -57,7 +56,6 @@ class KeyCaptureDialog(QDialog):
             keylist += keyspressed[i]
             if(i != len(keyspressed) -1):
                 keylist += "+"
-        print("in process", keylist)
         return keylist
         
 keymap = {}
@@ -87,7 +85,6 @@ def keyevent_to_string(event):
 def assign_key(callback=None):
     dialog = KeyCaptureDialog()
     if dialog.exec_() == QDialog.Accepted and dialog.key:
-        print("saved", dialog.key)
         saveKey(dialog.key)  # save the captured key
         Config.write(open("src\config.ini", "w"))  # save changes to config file
     if callback:

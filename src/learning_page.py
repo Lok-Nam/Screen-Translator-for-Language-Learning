@@ -10,6 +10,7 @@ class LearningPage(QWidget):
         self.current_card_info = None
         self.setupUI()
         self.setMaximumWidth(1000)
+        self.setWindowTitle("Learning Session")
 
     def setupUI(self):
         # main layout for the learning page
@@ -38,6 +39,10 @@ class LearningPage(QWidget):
         self.meaning_label = QLabel()
         self.layout.addWidget(self.meaning_label)
         self.meaning_label.hide()
+
+        self.pos_label = QLabel()
+        self.layout.addWidget(self.pos_label)
+        self.pos_label.hide()
 
         # feedback buttons
         self.user_feedback_buttons_layout = QHBoxLayout()
@@ -71,6 +76,7 @@ class LearningPage(QWidget):
     def reveal_meaning(self):
         self.reveal_button.hide()
         self.meaning_label.show()
+        self.pos_label.show()
         self.again_button.show()
         self.hard_button.show()
         self.good_button.show()
@@ -78,6 +84,7 @@ class LearningPage(QWidget):
 
     def handle_feedback(self, feedback_card, time):
         self.meaning_label.hide()
+        self.pos_label.hide()
         self.again_button.hide()
         self.hard_button.hide()
         self.good_button.hide()
@@ -110,7 +117,8 @@ class LearningPage(QWidget):
         self.review_word_label.setText(card_word)
         self.review_word_label.show()
         self.reveal_button.show()
-        self.meaning_label.setText(f"Meaning: {card_meaning}, POS: {card_pos}")
+        self.meaning_label.setText(f"Meaning: {card_meaning}")
+        self.pos_label.setText(f"POS: {card_pos}")
 
         time_again = self.card_manager.get_schedule_time(card_again)
         time_hard = self.card_manager.get_schedule_time(card_hard)

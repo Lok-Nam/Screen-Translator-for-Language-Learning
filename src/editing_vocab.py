@@ -33,10 +33,10 @@ class EditVocabPage(QDialog):
         self.pos_selector.setCurrentText(self.info['part_of_speech'])  # Set to current part of speech
         layout.addWidget(self.pos_selector)
 
-        self.frequency_label = QLabel(f"ID: {self.info['frequency']}")
+        self.frequency_label = QLabel(f"Frequency : {self.info['frequency']}")
         layout.addWidget(self.frequency_label)
 
-        self.date_label = QLabel(f"ID: {self.info['date_added']}")
+        self.date_label = QLabel(f"Date added : {self.info['date_added']}")
         layout.addWidget(self.date_label)
 
 

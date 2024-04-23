@@ -1,4 +1,5 @@
 import spacy
+from spacy import displacy
 import openai
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -40,6 +41,18 @@ class GrammarAnalyser:
             analysis_results.append(sentence_results)
 
         return analysis_results
+    
+    def analyse_sentence_vis(self, text):
+        doc = self.nlp(text)
+        self.options = {
+            'distance': 100,
+            'compact': True,
+            'bg': '#fafafa',
+            'color': '#000000',
+            'font': 'Arial'
+        }
+        html = displacy.render(doc, style='dep', page=True, options=self.options)
+        return html
     
     def analyse_sentence_gpt(self, text):
         load_dotenv()

@@ -71,7 +71,6 @@ class VocabManager:
         self.db.openConnection()
         vocab_list = self.tokenize_and_return_list(sentence)
         for word, pos, meaning in vocab_list:
-            print(meaning)
             existing_word = self.db.fetch_data('vocabulary', ['id', 'frequency'], f"word='{word}'")
             if existing_word:
                 word_id, frequency = existing_word[0]

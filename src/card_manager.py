@@ -61,11 +61,9 @@ class CardManager:
 
     def get_card_from_deck(self):
         # get a card
-        print("drawing", len(self.deck))
         if self.deck:
             card = self.deck.pop(0)
         else:
-            print("deck is empty")
             return None
         card_object = card[0]
         now = datetime.datetime.now()
@@ -102,18 +100,15 @@ class CardManager:
                 self.is_complete = True
         else:
             # card has not done reviewing, need to put it back to the deck
-            print("entered else")
             i = 0
             if(card[2] == 'new'):
                 self.num_new -= 1
                 self.num_learning += 1
                 card[2] = 'learning'
-
             for i in range(len(self.deck)):
                 if self.deck[i][0].due < card[0].due:
                     i += 1
                 else:
-                    # insert here
                     self.deck.insert(i, card)
                     return
             # if the card is the last card in the deck
