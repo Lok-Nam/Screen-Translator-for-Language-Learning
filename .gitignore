@@ -168,3 +168,5 @@ dbtest.py
 cropped_image.png
 database.db
 database
+config.ini
+src\config.ini
